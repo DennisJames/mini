@@ -1,5 +1,6 @@
 * { padding: 0; margin: 0; font-size: 40px; }
 body { padding: 10px 20px; }
+label { margin: 10px 0px; display: inline-block;}
 .clearBoth { clear: both; }
 #app {height: 100%;width: 100%}
 .icon.pepper {
@@ -31,4 +32,28 @@ body { padding: 10px 20px; }
 }
 .info_wrap p{
 	line-height: 50px;
+}
+.food_wrap{
+	padding-top: 20px;
+}
+.food_wrap textarea{
+	width: 100%;
+	margin: 10px 0;
+}
+.food_wrap select{
+	width: 200px;
+}
+.food_avatar_wrap{
+	text-align: center;
+}
+.food_avatar{
+	height: 400px;
+}
+.btn_small{
+	width: 50px;
+}
+.btn_submit {
+	width: 50%;
+	display: inline-block;
+	font-size: 50px;
 }

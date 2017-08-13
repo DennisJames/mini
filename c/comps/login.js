@@ -30,11 +30,12 @@ module.exports = {
 					window.alert('登录失败，用户名或密码错误，请重试。');
 					return;
 				}
-				if(self.type == 0){
+				console.log(res.body);
+				// if(self.type == 0){
 					cookie.set('user_session_key', res.body.user_session_key);
-				} else {
+				/*} else {
 					cookie.set('admin_session_key', res.body.admin_session_key);					
-				}
+				}*/
 				cookie.set('type', self.type);
 				cookie.set('username', res.body.realname);
 				router.push('/profile');

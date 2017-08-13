@@ -20,12 +20,15 @@ var share_text = {
 module.exports = {
 	share_text: share_text,
 	cgis: {
+		upload: cgiHost + "/upload-pic", // post
+
 		userLogin: cgiHost + "/cgi-bin/UserLogin",  // post
 		userLogout: cgiHost + "/cgi-bin/userLogout",
 		adminLogin: cgiHost + "/cgi-bin/AdminLogin", // post
 		adminLogout: cgiHost + "/cgi-bin/AdminLogout",
 
-		queryFood: cgiHost + "cgi-bin/query_food?task=food&action=queryList&start={{start}}&count={{count}}"
+		queryFood: cgiHost + "/cgi-bin/query_food?task=food&action=queryList&start={{start}}&count={{count}}",
+		addFood: cgiHost + "/cgi-bin/query_food?task=food&action=addFood" // post
 	},
 	food_type: ["粤菜", "川菜", "鲁菜", "苏菜", "浙菜", "闽菜", "湘菜", "徽菜"]
 };

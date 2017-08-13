@@ -31,7 +31,9 @@ gulp.task('watch', function () {
 });
 gulp.task('default', ['clean'], build(opts));
 gulp.task('clean', function () {
-	return gulp.src(dist, { read: false })
+	return gulp.src(['/*.js', '/*.css', '*.html'].map(function(i){
+		return dist + i;
+	}), { read: false })
 	   .pipe(vfe.clean())
 });
 
