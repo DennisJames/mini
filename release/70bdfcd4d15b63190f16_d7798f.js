@@ -56,7 +56,7 @@
 		component: __webpack_require__(1)
 	}, {
 		path: '/profile',
-		component: __webpack_require__(2)
+		component: __webpack_require__(3)
 	}, {
 		path: '/login',
 		component: __webpack_require__(5)
@@ -81,7 +81,7 @@
 
 /***/ }),
 /* 1 */
-/***/ (function(module, exports) {
+/***/ (function(module, exports, __webpack_require__) {
 
 	var Data = [
 		{
@@ -103,6 +103,7 @@
 			address: "腾大12楼2号窗口"
 		}
 	];
+	var cgis = __webpack_require__(2).cgis;
 
 	module.exports = { 
 		template: `<ul>
@@ -115,16 +116,59 @@
 			return {
 				list: Data
 			}
+		},
+		created: function(){
+			this.$http.get(cgis.queryFood.replace('{{start}}', 0).replace('{{count}}', 5)).then(function(res){
+				console.log(res);
+			}, function(err){
+				console.log(err);
+			})
 		}
 	}
 
 /***/ }),
 /* 2 */
+/***/ (function(module, exports) {
+
+	'use strict';
+	var USE_PROXY = true;
+	var cgiHost = USE_PROXY ? "http://127.0.0.1" : "http://115.159.200.162";
+	var share_text = {
+		content: {
+			'user': '无论在不在现场，V.I.P永远站在BIGBANG身旁，购买礼包支持他们，有机会获赠签名周边哦~',
+			'default': '无论在不在现场，V.I.P永远站在BIGBANG身旁，购买礼包支持他们，有机会获赠签名周边哦~',
+			'open': '抢明星生日徽章号，获赠限量版熊公仔，你是下一个幸运儿吗？',
+			'show': '我是V.I.P，我骄傲，购买BB礼包，为自己喜欢的男神加油～',
+			'qqvip': '购买礼包支持 BB,即使不在现场,仍有机会获赠签名周边哦~'
+		},
+		title: {
+			'user': '我购买了{score}个BIGBANG数字礼包，全球排名第{rank}位',
+			'default': '奔走相告，BIGBANG官方授权数字礼包酷炫来袭~',
+			'open': '我的礼包徽章号{no}，一起为BIGBANG加油',
+			'show': '我是BIGBANG礼包第{num}位支持者，全球排名第{rank}位',
+			'qqvip': 'BIGBANG 官方授权大礼包,QQ 会员购买 8 折优惠'
+		}
+	};
+	module.exports = {
+		share_text: share_text,
+		cgis: {
+			userLogin: cgiHost + "/cgi-bin/UserLogin",  // post
+			userLogout: cgiHost + "/cgi-bin/userLogout",
+			adminLogin: cgiHost + "/cgi-bin/AdminLogin", // post
+			adminLogout: cgiHost + "/cgi-bin/AdminLogout",
+
+			queryFood: cgiHost + "cgi-bin/query_food?task=food&action=queryList&start={{start}}&count={{count}}"
+		},
+		food_type: ["粤菜", "川菜", "鲁菜", "苏菜", "浙菜", "闽菜", "湘菜", "徽菜"]
+	};
+
+/***/ }),
+/* 3 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var cookie = __webpack_require__(3);
-	var FOOD_TYPE = __webpack_require__(4).food_type;
-	var cgis = __webpack_require__(4).cgis;
+	var cookie = __webpack_require__(4);
+	var FOOD_TYPE = __webpack_require__(2).food_type;
+	var cgis = __webpack_require__(2).cgis;
 	module.exports = { 
 		template: `<div v-if="!!user">
 				<p>{{user.name}}<span v-if="user.type==1">管理员</span>,你好</p>
@@ -192,7 +236,7 @@
 	};
 
 /***/ }),
-/* 3 */
+/* 4 */
 /***/ (function(module, exports) {
 
 	'use strict';
@@ -253,46 +297,12 @@
 	}
 
 /***/ }),
-/* 4 */
-/***/ (function(module, exports) {
-
-	'use strict';
-	var USE_PROXY = true;
-	var cgiHost = USE_PROXY ? "http://127.0.0.1" : "http://115.159.200.162";
-	var share_text = {
-		content: {
-			'user': '无论在不在现场，V.I.P永远站在BIGBANG身旁，购买礼包支持他们，有机会获赠签名周边哦~',
-			'default': '无论在不在现场，V.I.P永远站在BIGBANG身旁，购买礼包支持他们，有机会获赠签名周边哦~',
-			'open': '抢明星生日徽章号，获赠限量版熊公仔，你是下一个幸运儿吗？',
-			'show': '我是V.I.P，我骄傲，购买BB礼包，为自己喜欢的男神加油～',
-			'qqvip': '购买礼包支持 BB,即使不在现场,仍有机会获赠签名周边哦~'
-		},
-		title: {
-			'user': '我购买了{score}个BIGBANG数字礼包，全球排名第{rank}位',
-			'default': '奔走相告，BIGBANG官方授权数字礼包酷炫来袭~',
-			'open': '我的礼包徽章号{no}，一起为BIGBANG加油',
-			'show': '我是BIGBANG礼包第{num}位支持者，全球排名第{rank}位',
-			'qqvip': 'BIGBANG 官方授权大礼包,QQ 会员购买 8 折优惠'
-		}
-	};
-	module.exports = {
-		share_text: share_text,
-		cgis: {
-			userLogin: cgiHost + "/cgi-bin/UserLogin",  // post
-			userLogout: cgiHost + "/cgi-bin/userLogout",
-			adminLogin: cgiHost + "/cgi-bin/AdminLogin", // post
-			adminLogout: cgiHost + "/cgi-bin/AdminLogout"
-		},
-		food_type: ["粤菜", "川菜", "鲁菜", "苏菜", "浙菜", "闽菜", "湘菜", "徽菜"]
-	};
-
-/***/ }),
 /* 5 */
 /***/ (function(module, exports, __webpack_require__) {
 
-	var cgis = __webpack_require__(4).cgis;
+	var cgis = __webpack_require__(2).cgis;
 	var util = __webpack_require__(6);
-	var cookie = __webpack_require__(3);
+	var cookie = __webpack_require__(4);
 	module.exports = {
 		template: `<div>
 			username:<input type="text" v-model="name" /><br />

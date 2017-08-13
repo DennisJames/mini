@@ -23,7 +23,9 @@ module.exports = {
 		userLogin: cgiHost + "/cgi-bin/UserLogin",  // post
 		userLogout: cgiHost + "/cgi-bin/userLogout",
 		adminLogin: cgiHost + "/cgi-bin/AdminLogin", // post
-		adminLogout: cgiHost + "/cgi-bin/AdminLogout"
+		adminLogout: cgiHost + "/cgi-bin/AdminLogout",
+
+		queryFood: cgiHost + "cgi-bin/query_food?task=food&action=queryList&start={{start}}&count={{count}}"
 	},
 	food_type: ["粤菜", "川菜", "鲁菜", "苏菜", "浙菜", "闽菜", "湘菜", "徽菜"]
 };

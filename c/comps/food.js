@@ -18,6 +18,7 @@ var Data = [
 		address: "腾大12楼2号窗口"
 	}
 ];
+var cgis = require('const').cgis;
 
 module.exports = { 
 	template: `<ul>
@@ -30,5 +31,12 @@ module.exports = {
 		return {
 			list: Data
 		}
+	},
+	created: function(){
+		this.$http.get(cgis.queryFood.replace('{{start}}', 0).replace('{{count}}', 5)).then(function(res){
+			console.log(res);
+		}, function(err){
+			console.log(err);
+		})
 	}
 }
