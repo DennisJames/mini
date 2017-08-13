@@ -1,4 +1,6 @@
 'use strict';
+var USE_PROXY = true;
+var cgiHost = USE_PROXY ? "http://127.0.0.1" : "http://115.159.200.162";
 var share_text = {
 	content: {
 		'user': '无论在不在现场，V.I.P永远站在BIGBANG身旁，购买礼包支持他们，有机会获赠签名周边哦~',
@@ -17,7 +19,11 @@ var share_text = {
 };
 module.exports = {
 	share_text: share_text,
-	cgi: {
-
-	}
+	cgis: {
+		userLogin: cgiHost + "/cgi-bin/UserLogin",  // post
+		userLogout: cgiHost + "/cgi-bin/userLogout",
+		adminLogin: cgiHost + "/cgi-bin/AdminLogin", // post
+		adminLogout: cgiHost + "/cgi-bin/AdminLogout"
+	},
+	food_type: ["粤菜", "川菜", "鲁菜", "苏菜", "浙菜", "闽菜", "湘菜", "徽菜"]
 };
