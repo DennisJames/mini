@@ -22,8 +22,12 @@ var router = express.Router();
 var fs = require('fs');
 var formidable = require('formidable');
 router.post('/', function(req, res){
+	var _tmp = 'release/tmp';
+	fs.exists(_tmp, function(exist){
+		if(!exist) fs.mkdirSync(_tmp);
+	})
 	var form = new formidable.IncomingForm();
-	form.uploadDir = 'release/.static/tmp';
+	form.uploadDir = _tmp;
 	form.parse(req, function(err, data, files) {
 	    if (err) throw err;
 	    var tmp_path = files.file.path;

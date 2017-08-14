@@ -100,8 +100,10 @@ module.exports = {
 				window.alert("信息不能为空!");
 				return;
 			}
-			// var cgiParam = util.queryStringify(self.food);
-			var cgiParam = self.food;
+			var cgiParam = 'food=' + JSON.stringify(self.food);
+			// var cgiParam = 'food=' + util.queryStringify(self.food);
+			console.log(cgiParam);
+			// var cgiParam = self.food;
 			self.$http.post(cgis.addFood, cgiParam).then(function(res){
 				console.log(res);
 			}, function(err){

@@ -27,8 +27,12 @@ module.exports = {
 		adminLogin: cgiHost + "/cgi-bin/AdminLogin", // post
 		adminLogout: cgiHost + "/cgi-bin/AdminLogout",
 
+		countFood: cgiHost + "/cgi-bin/query_food?task=food&action=getCount",
 		queryFood: cgiHost + "/cgi-bin/query_food?task=food&action=queryList&start={{start}}&count={{count}}",
 		addFood: cgiHost + "/cgi-bin/query_food?task=food&action=addFood" // post
 	},
-	food_type: ["粤菜", "川菜", "鲁菜", "苏菜", "浙菜", "闽菜", "湘菜", "徽菜"]
+	food_type: ["粤菜", "川菜", "鲁菜", "苏菜", "浙菜", "闽菜", "湘菜", "徽菜"],
+	message: {
+		http_error: "网络请求错误！"
+	}
 };

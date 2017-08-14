@@ -19,12 +19,14 @@ var Data = [
 	}
 ];
 var cgis = require('const').cgis;
+var message = require('const').message;
 
 module.exports = { 
-	template: `<ul>
-				<router-link :to="'/info/'+item.id" v-for="item in list" tag="li" :key="item.id">
-					<img v-bind:src="item.pic" :alt="item.name" />
-					<h3>{{item.name}}</h3><p>{{item.address}}</p>
+	template: `<ul class="food_list">
+				<router-link :to="'/info/'+item.id" v-for="item in list" tag="li" :key="item.id" class="item">
+					<img v-bind:src="item.pic_url" :alt="item.name" />
+					<h3>{{item.name}}</h3><p>{{item.location}}</p>
+					<div class="clearBoth"></div>
 				</router-link>
 			</ul>`,
 	data: function(){
@@ -33,8 +35,17 @@ module.exports = {
 		}
 	},
 	created: function(){
-		this.$http.get(cgis.queryFood.replace('{{start}}', 0).replace('{{count}}', 5)).then(function(res){
+		this.$http.get(cgis.countFood).then(function(res){
+			console.log(res.body.jsResult[0].count);
+		})
+		this.$http.get(cgis.queryFood.replace('{{start}}', 2).replace('{{count}}', 10)).then(function(res){
 			console.log(res);
+			if(!res.ok || !res.body || res.body.iRet != 0){ 
+				window.alert(message.http_error);
+				this.list = [];
+				return ;
+			}
+			this.list = res.body.jsResult;
 		}, function(err){
 			console.log(err);
 		})

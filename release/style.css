@@ -1,8 +1,11 @@
 * { padding: 0; margin: 0; font-size: 40px; }
-body { padding: 10px 20px; }
+body { padding: 10px 20px; height: 100%; width: 100%}
+html{
+	height: 100%;
+}
 label { margin: 10px 0px; display: inline-block;}
 .clearBoth { clear: both; }
-#app {height: 100%;width: 100%}
+#app {height: 100%;width: 100%;overflow: hidden;}
 .icon.pepper {
 	display: inline-block;
 	background-image: url('./pepper.jpg');
@@ -15,11 +18,21 @@ label { margin: 10px 0px; display: inline-block;}
 	margin-bottom: 20px;
 	font-size: 2em;
 }
-.nav { 
+.footer{
+	width: 100%;
+	background: #fff; 
 	position: absolute;
 	bottom: 0px;
-	width: 100%;
+	left: 0px;
+	bottom: 0px;
+	height: 100px;
+}
+.nav { 
+	/*position: absolute;
+	bottom: 0px;*/
+	/*width: 100%;*/
 	list-style: none;
+	/*display: none;*/
 }
 .nav li {
 	color: black;
@@ -56,4 +69,36 @@ label { margin: 10px 0px; display: inline-block;}
 	width: 50%;
 	display: inline-block;
 	font-size: 50px;
+}
+.food_list{
+	list-style: none;
+	height: 100%;
+	margin-top: -116px;
+	display: block;
+	overflow: auto;
+}
+.food_list .item {
+	border: 1px solid #CCC;
+	margin: 20px 0px;
+	padding: 10px;
+	cursor: pointer;
+}
+.food_list .item:active{
+	background: #CCC;
+}
+.food_list .item img{
+	width: 200px;
+	height: 200px;
+	margin-right: 50px;
+	display: inline-block;
+	float: left;
+}
+.food_list .item h3,p{
+	margin: 10px 0px 10px 250px;
+}
+.food_list .item h3{
+	font-size: 50px;
+}
+.food_list .item p{
+	color: #666;
 }
