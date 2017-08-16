@@ -1,23 +1,3 @@
-var Data = [
-	{
-		id: 1,
-		name: "青椒炒肉",
-		pic: "/img/pic1.jpg",
-		address: "腾大12楼自选窗口"
-	},
-	{
-		id: 2,
-		name: "三极地",
-		pic: "/img/pic1.jpg",
-		address: "腾大12楼1号窗口"
-	},
-	{
-		id: 3,
-		name: "汤面",
-		pic: "/img/pic1.jpg",
-		address: "腾大12楼2号窗口"
-	}
-];
 var cgis = require('const').cgis;
 var message = require('const').message;
 var cookie = require('libs/cookie');
@@ -35,7 +15,7 @@ module.exports = {
 			</ul>`,
 	data: function(){
 		return {
-			list: Data
+			list: []
 		}
 	},
 	created: function(){
