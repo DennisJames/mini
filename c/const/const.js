@@ -1,6 +1,6 @@
 'use strict';
 var USE_PROXY = true;
-var cgiHost = USE_PROXY ? "http://127.0.0.1" : "http://115.159.200.162";
+var cgiHost = USE_PROXY ? 'http://' + window.location.host : "http://115.159.200.162";
 var share_text = {
 	content: {
 		'user': '无论在不在现场，V.I.P永远站在BIGBANG身旁，购买礼包支持他们，有机会获赠签名周边哦~',

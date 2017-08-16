@@ -25,20 +25,23 @@ module.exports = {
 			request(cgis.recommendFood.replace('{{usessionkey}}', sessionKey)
 				.replace('{{start}}', 0).replace('{{num}}', 10), 'get', function(err, res){
 					console.log(err, res);
-					if(err) return ;
+					if(err) {window.alert(err.message); return ;}
 					var ids = res.food_recomm.map(function(i){
 						return i.food_id;
 					});
 					console.log(ids.join(','))
 					request(cgis.queryFoods.replace("{{ids}}", ids.join(',')), 'get', function(err, res){
 						console.log(err, res);
-						if(err) { window.alert(message.http_error); }
+						if(err) { window.alert(message.http_error); return ;}
 						self.list = res.jsResult;
 					})
 				})
 		}
+		else{
+			self.allList(1);
+		}
 	},
-	method: {
+	methods: {
 		allList: function(page){
 			this.$http.get(cgis.queryFood.replace('{{start}}', (page-1)*PAGE_SIZE).replace('{{count}}', PAGE_SIZE)).then(function(res){
 				console.log(res);

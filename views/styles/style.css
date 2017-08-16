@@ -5,7 +5,7 @@ html{
 }
 label { margin: 10px 0px; display: inline-block;}
 .clearBoth { clear: both; }
-#app {height: 100%;width: 100%;overflow: hidden;}
+#app {height: 100%;width: 100%;overflow: hidden; position: relative;}
 .icon.pepper {
 	display: inline-block;
 	background-image: url('./pepper.jpg');
