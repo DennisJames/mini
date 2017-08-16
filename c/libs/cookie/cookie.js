@@ -51,6 +51,6 @@ module.exports = {
 	del : function(name, domain, path) {
 		var exp = new Date();
 		exp.setTime(exp.getTime() - 1);
-		document.cookie = name + "=; expires=" + exp.toGMTString() + ";" + (path ? ("path=" + path + "; ") : "path=/; ") + (domain ? ("domain=" + domain + ";") : ("domain=" + window.location.host + ";"));
+		document.cookie = name + "=; expires=" + exp.toGMTString() + ";" + (path ? ("path=" + path + "; ") : "path=/; ") + (domain ? ("domain=" + domain + ";") : ("domain=" + window.location.hostname + ";"));
 	}
 }
