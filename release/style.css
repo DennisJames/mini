@@ -134,6 +134,7 @@ label { margin: 10px 0px; display: inline-block;}
 .praise_txt,.oppose_txt{
 	display: inline-block;
 	width: 200px;
+	text-align: center;
 	margin: 0 auto;
 }
 /*.loading{
