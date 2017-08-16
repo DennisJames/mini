@@ -73,7 +73,7 @@ label { margin: 10px 0px; display: inline-block;}
 .food_list{
 	list-style: none;
 	height: 100%;
-	margin-top: -116px;
+	/*margin-top: -116px;*/
 	display: block;
 	overflow: auto;
 }
@@ -102,3 +102,57 @@ label { margin: 10px 0px; display: inline-block;}
 .food_list .item p{
 	color: #666;
 }
+
+.praise_oppose{
+	width: 100%;
+	position: absolute;
+	bottom: 200px;
+}
+.praise_oppose_center{
+	margin: 0 auto;
+	width: 600px;
+}
+.praise_img,.oppose_img{
+	width: 220px;
+	height: 220px;
+	display: inline-block;
+}
+.praise,.oppose{
+	width:220px;
+	display: inline-block;
+}
+.oppose{
+	color: #000;
+}
+.praise{
+	margin-right: 50px;
+	color: #EB4F38;
+}
+.add_num,.reduce_num{
+	display: none;
+}
+.praise_txt,.oppose_txt{
+	display: inline-block;
+	width: 200px;
+	margin: 0 auto;
+}
+/*.loading{
+	width: 100%;
+}
+.mod_loading{
+	margin: 0 auto;
+	padding: 10px;
+	text-align: center;
+}
+.icon_loading{
+	display: inline-block;
+	width: 16px;
+	height: 16px;
+	background-image: url(http://vm.gtimg.cn/tencentvideo/vstyle/mobile/v2/style/img/common/loading.gif);
+	background-size: contain;
+}
+.mod_loading .icon_text{
+    display: inline-block;
+    font-size: 13px;
+    color: #898989;
+}*/
