@@ -21,7 +21,7 @@ module.exports = {
 			var expire = new Date();
 			expire.setTime(today.getTime() + 3600000 * hour);
 		}
-		document.cookie = name + "=" + value + "; " + (hour ? ("expires=" + expire.toGMTString() + "; ") : "") + (path ? ("path=" + path + "; ") : "path=/; ") + (domain ? ("domain=" + domain + ";") : ("domain=" + window.location.host + ";"));
+		document.cookie = name + "=" + value + "; " + (hour ? ("expires=" + expire.toGMTString() + "; ") : "") + (path ? ("path=" + path + "; ") : "path=/; ") + (domain ? ("domain=" + domain + ";") : ("domain=" + window.location.hostname + ";"));
 		return true;
 	},
 
@@ -51,6 +51,6 @@ module.exports = {
 	del : function(name, domain, path) {
 		var exp = new Date();
 		exp.setTime(exp.getTime() - 1);
-		document.cookie = name + "=; expires=" + exp.toGMTString() + ";" + (path ? ("path=" + path + "; ") : "path=/; ") + (domain ? ("domain=" + domain + ";") : ("domain=" + window.location.host + ";"));
+		document.cookie = name + "=; expires=" + exp.toGMTString() + ";" + (path ? ("path=" + path + "; ") : "path=/; ") + (domain ? ("domain=" + domain + ";") : ("domain=" + window.location.hostname + ";"));
 	}
 }

@@ -1,6 +1,6 @@
 'use strict';
 var USE_PROXY = true;
-var cgiHost = USE_PROXY ? "http://127.0.0.1" : "http://115.159.200.162";
+var cgiHost = USE_PROXY ? 'http://' + window.location.host : "http://115.159.200.162";
 var share_text = {
 	content: {
 		'user': '无论在不在现场，V.I.P永远站在BIGBANG身旁，购买礼包支持他们，有机会获赠签名周边哦~',
@@ -31,7 +31,8 @@ module.exports = {
 		queryFood: cgiHost + "/cgi-bin/query_food?task=food&action=queryList&start={{start}}&count={{count}}",
 		queryFoods: cgiHost + "/cgi-bin/query_food?task=food&action=queryIds&id={{ids}}",
 		addFood: cgiHost + "/cgi-bin/query_food?task=food&action=addFood", // post
-		comFood:cgiHost+'/cgi-bin/tencentdiet.exe?click_type={{}}&user_key={{}}&food_id={{}}',
+		reportFood:cgiHost+'/cgi-bin/UserRecord.exe?click_type={{}}&user_key={{}}&food_id={{}}',
+		comFood: cgiHost + "/cgi-bin/query_food?task=food&action=likeOrNot&type={{}}&&id={{}}",
 		detailFood:cgiHost+'/cgi-bin/query_food?task=food&action=queryInfo&id={{}}',
 		recommendFood: cgiHost + '/cgi-bin/UserRecomm?user_session_key={{usessionkey}}&recommend_food_start={{start}}&recommend_food_num={{num}}'
 	},

@@ -5,7 +5,7 @@ html{
 }
 label { margin: 10px 0px; display: inline-block;}
 .clearBoth { clear: both; }
-#app {height: 100%;width: 100%;overflow: hidden;}
+#app {height: 100%;width: 100%;overflow: hidden; position: relative;}
 .icon.pepper {
 	display: inline-block;
 	background-image: url('./pepper.jpg');
@@ -120,6 +120,7 @@ label { margin: 10px 0px; display: inline-block;}
 .praise,.oppose{
 	width:220px;
 	display: inline-block;
+	position: relative;
 }
 .oppose{
 	color: #000;
@@ -129,6 +130,9 @@ label { margin: 10px 0px; display: inline-block;}
 	color: #EB4F38;
 }
 .add_num,.reduce_num{
+	position: absolute;
+	top: 0px;
+	left: 80px;
 	display: none;
 }
 .praise_txt,.oppose_txt{
@@ -137,23 +141,3 @@ label { margin: 10px 0px; display: inline-block;}
 	text-align: center;
 	margin: 0 auto;
 }
-/*.loading{
-	width: 100%;
-}
-.mod_loading{
-	margin: 0 auto;
-	padding: 10px;
-	text-align: center;
-}
-.icon_loading{
-	display: inline-block;
-	width: 16px;
-	height: 16px;
-	background-image: url(http://vm.gtimg.cn/tencentvideo/vstyle/mobile/v2/style/img/common/loading.gif);
-	background-size: contain;
-}
-.mod_loading .icon_text{
-    display: inline-block;
-    font-size: 13px;
-    color: #898989;
-}*/

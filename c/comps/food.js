@@ -1,23 +1,3 @@
-var Data = [
-	{
-		id: 1,
-		name: "青椒炒肉",
-		pic: "/img/pic1.jpg",
-		address: "腾大12楼自选窗口"
-	},
-	{
-		id: 2,
-		name: "三极地",
-		pic: "/img/pic1.jpg",
-		address: "腾大12楼1号窗口"
-	},
-	{
-		id: 3,
-		name: "汤面",
-		pic: "/img/pic1.jpg",
-		address: "腾大12楼2号窗口"
-	}
-];
 var cgis = require('const').cgis;
 var message = require('const').message;
 var cookie = require('libs/cookie');
@@ -27,7 +7,7 @@ var PAGE_SIZE = 10;
 
 module.exports = { 
 	template: `<ul class="food_list">
-				<router-link :to="'/info/'+item.id" v-for="item in list" tag="li" :key="item.id" class="item">
+				<router-link :to="'/info/'+item.id" v-for="item in list" tag="li" :key="item.id" v-bind:data-id="item.id" class="item" v-on:click.native="report">
 					<img v-bind:src="item.pic_url" :alt="item.name" />
 					<h3>{{item.name}}</h3><p>{{item.location}}</p>
 					<div class="clearBoth"></div>
@@ -35,7 +15,7 @@ module.exports = {
 			</ul>`,
 	data: function(){
 		return {
-			list: Data
+			list: []
 		}
 	},
 	created: function(){
@@ -45,19 +25,20 @@ module.exports = {
 			request(cgis.recommendFood.replace('{{usessionkey}}', sessionKey)
 				.replace('{{start}}', 0).replace('{{num}}', 10), 'get', function(err, res){
 					console.log(err, res);
-					if(err) return ;
-					var ids = res.food_id.map(function(i){
-						return i.food_id;
-					});
+					if(err) {window.alert(err.message); return ;}
+					var ids = res.food_id;
 					request(cgis.queryFoods.replace("{{ids}}", ids.join(',')), 'get', function(err, res){
 						console.log(err, res);
-						if(err) { window.alert(message.http_error); }
+						if(err) { window.alert(message.http_error); return ;}
 						self.list = res.jsResult;
 					})
 				})
 		}
+		else{
+			self.allList(1);
+		}
 	},
-	method: {
+	methods: {
 		allList: function(page){
 			this.$http.get(cgis.queryFood.replace('{{start}}', (page-1)*PAGE_SIZE).replace('{{count}}', PAGE_SIZE)).then(function(res){
 				console.log(res);
@@ -74,6 +55,21 @@ module.exports = {
 		countData: function(){
 			this.$http.get(cgis.countFood).then(function(res){
 				console.log(res.body.jsResult[0].count);
+			})
+		},
+		report:function(e){
+			console.log(e.currentTarget,11111111111111)
+            var self=this
+			var status=1
+			var user_session=cookie.get('user_session_key')
+			var id=e.currentTarget.getAttribute('data-id')
+			var res=[status,user_session,id],i=0;
+			self.$http.post(cgis.reportFood.replace(/{{}}/g,function(){
+				return res[i++]
+			})).then(function(data){
+				//success
+			},function(){
+				//fail
 			})
 		}
 	}
