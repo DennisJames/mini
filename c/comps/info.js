@@ -20,12 +20,12 @@ module.exports = {
 						</div>
 						<div  class="praise_oppose">
 						  <div class="praise_oppose_center">
-						 	<div class="praise" v-on:click.once="toggle('praise')">
+						 	<div class="praise" v-on:click="toggle('praise')">
 								<span class="praise_img"><img src="/praise.png" /></span>
 								<span class="praise_txt">{{food.like_cnt}}</span>
 								<span class="add_num"><em>+1</em></span>
 							</div>
-							<div class="oppose" v-on:click.once="toggle">
+							<div class="oppose" v-on:click="toggle">
 								<span class="oppose_img"><img src="/oppose.png" /></span>
 								<span class="oppose_txt">{{food.unlike_cnt}}</span>
 								<span class="reduce_num"><em>+1</em></span>
@@ -61,25 +61,50 @@ module.exports = {
 		})
 	},
 	methods:{
-		toggle:function(msg){
+		toggle:function(msg,e){
 			var self=this
-			var status=msg=='praise'?1:2
-			// var user_session=cookie.get('user_session_key')
+			var el
+			if(msg=='praise'){
+				status=1
+				el=$('.add_num')
+			}else{
+				status=2
+				el=$('.reduce_num')
+			}
+			if(el.data('isClicked')){
+				self.animation(el,'clicked')
+				return 
+			}
 			var id=self.$route.params.id
 			var res=[status,id],i=0;
 			self.$http.post(cgis.comFood.replace(/{{}}/g,function(){
 				return res[i++]
 			})).then(function(data){
-				console.log(data)
 				if(msg=='praise'){
 					++self.food.like_cnt
 				}else{
 					++self.food.unlike_cnt
 				}
-				console.log(self.food.like_cnt,self.food.unlike_cnt)
+				el.data('isClicked',1)
+				self.animation(el,'+1')
 			},function(){
 				//fail
 			})
+		},
+		animation:function($el,txt){
+			var top;
+			$el.find("em").text(txt)
+			$el.css('display','inline-block')
+			var timer=setInterval(function(){
+				top=parseInt($el.css('top'))
+				if(top<=-100){
+					clearInterval(timer)
+					$el.css({'display':'none',
+							  'top':0})
+				}else{
+					$el.css('top',top-20)
+				}
+			},100)
 		}
 	}
 }
