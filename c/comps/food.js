@@ -7,7 +7,7 @@ var PAGE_SIZE = 10;
 
 module.exports = { 
 	template: `<ul class="food_list">
-				<router-link :to="'/info/'+item.id" v-for="item in list" tag="li" :key="item.id" class="item">
+				<router-link :to="'/info/'+item.id" v-for="item in list" tag="li" :key="item.id" v-bind:data-id="item.id" class="item" v-on:click.native="report">
 					<img v-bind:src="item.pic_url" :alt="item.name" />
 					<h3>{{item.name}}</h3><p>{{item.location}}</p>
 					<div class="clearBoth"></div>
@@ -58,6 +58,21 @@ module.exports = {
 		countData: function(){
 			this.$http.get(cgis.countFood).then(function(res){
 				console.log(res.body.jsResult[0].count);
+			})
+		},
+		report:function(e){
+			console.log(e.currentTarget,11111111111111)
+            var self=this
+			var status=1
+			var user_session=cookie.get('user_session_key')
+			var id=e.currentTarget.getAttribute('data-id')
+			var res=[status,user_session,id],i=0;
+			self.$http.post(cgis.reportFood.replace(/{{}}/g,function(){
+				return res[i++]
+			})).then(function(data){
+				//success
+			},function(){
+				//fail
 			})
 		}
 	}

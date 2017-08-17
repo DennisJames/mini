@@ -22,12 +22,12 @@ module.exports = {
 						  <div class="praise_oppose_center">
 						 	<div class="praise" v-on:click.once="toggle('praise')">
 								<span class="praise_img"><img src="/praise.png" /></span>
-								<span class="praise_txt">1000</span>
+								<span class="praise_txt">{{food.like_cnt}}</span>
 								<span class="add_num"><em>+1</em></span>
 							</div>
 							<div class="oppose" v-on:click.once="toggle">
 								<span class="oppose_img"><img src="/oppose.png" /></span>
-								<span class="oppose_txt">{{opposeNum}}</span>
+								<span class="oppose_txt">{{food.unlike_cnt}}</span>
 								<span class="reduce_num"><em>+1</em></span>
 							</div>
 						   </div>
@@ -38,9 +38,7 @@ module.exports = {
 		return {
 			TYPE_TXT: TYPE_TXT,
 			food: '',
-			errMsg:"loading...",
-			praiseNum:"",
-			opposeNum:""
+			errMsg:"loading..."
 		}
 	},
 	created: function(){
@@ -53,6 +51,8 @@ module.exports = {
 			if(data.jsResult&&data.jsResult.length>0){
 				self.errMsg=""
 				self.food=data.jsResult[0]
+				self.food.like_cnt=self.food.like_cnt||0
+				self.food.unlike_cnt=self.food.unlike_cnt||0
 			}else{
 				self.errMsg="获取数据失败"
 			}
@@ -63,14 +63,20 @@ module.exports = {
 	methods:{
 		toggle:function(msg){
 			var self=this
-			var status=msg?2:3
-			var user_session=cookie.get('user_session_key')
+			var status=msg=='praise'?1:2
+			// var user_session=cookie.get('user_session_key')
 			var id=self.$route.params.id
-			var res=[status,user_session,id],i=0;
+			var res=[status,id],i=0;
 			self.$http.post(cgis.comFood.replace(/{{}}/g,function(){
 				return res[i++]
-			})).then(function(){
-				msg?++self.praiseNum:++self.opposeNum
+			})).then(function(data){
+				console.log(data)
+				if(msg=='praise'){
+					++self.food.like_cnt
+				}else{
+					++self.food.unlike_cnt
+				}
+				console.log(self.food.like_cnt,self.food.unlike_cnt)
 			},function(){
 				//fail
 			})
