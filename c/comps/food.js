@@ -46,10 +46,9 @@ module.exports = {
 				.replace('{{start}}', 0).replace('{{num}}', 10), 'get', function(err, res){
 					console.log(err, res);
 					if(err) return ;
-					var ids = res.food_recomm.map(function(i){
+					var ids = res.food_id.map(function(i){
 						return i.food_id;
 					});
-					console.log(ids.join(','))
 					request(cgis.queryFoods.replace("{{ids}}", ids.join(',')), 'get', function(err, res){
 						console.log(err, res);
 						if(err) { window.alert(message.http_error); }
