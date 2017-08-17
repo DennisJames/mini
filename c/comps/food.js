@@ -9,7 +9,7 @@ module.exports = {
 	template: `<ul class="food_list">
 				<router-link :to="'/info/'+item.id" v-for="item in list" tag="li" :key="item.id" v-bind:data-id="item.id" class="item" v-on:click.native="report">
 					<img v-bind:src="item.pic_url" :alt="item.name" />
-					<h3>{{item.name}}</h3><p>{{item.location}}</p><p v-if="item.like_cnt">好评度：{{item.like_cnt == 0 && item.unlike_cnt == 0 ? '100' : item.like_cnt/(item.like_cnt+item.unlike_cnt)}}%</p>
+					<h3>{{item.name}}</h3><p>{{item.location}}</p><p v-if="item.like_cnt">好评度：{{item.like_cnt == 0 && item.unlike_cnt == 0 ? '100.00' : (100 * item.like_cnt/(item.like_cnt+item.unlike_cnt)).toFixed(2)}}%</p>
 					<div class="clearBoth"></div>
 				</router-link>
 			</ul>`,
