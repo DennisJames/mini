@@ -1,6 +1,7 @@
 var cookie = require('libs/cookie');
 var FOOD_TYPE = require('const').food_type;
 var cgis = require('const').cgis;
+var message = require('const').message;
 var util = require('modules/util');
 module.exports = { 
 	template: `<div v-if="!!user">
@@ -87,6 +88,17 @@ module.exports = {
 				console.log(err);
 			})
 		},
+		resetFood: function(){
+			var tmp = {
+				pic_url: '',
+				name: '',
+				introduce: '',
+				location: '',
+				food_type: 0,
+				pungency: 1
+			}
+			this.food = tmp;
+		},
 		submit: function(){
 			var self = this;
 			var test = true;
@@ -101,13 +113,16 @@ module.exports = {
 				return;
 			}
 			var cgiParam = 'food=' + JSON.stringify(self.food);
-			// var cgiParam = 'food=' + util.queryStringify(self.food);
-			console.log(cgiParam);
-			// var cgiParam = self.food;
 			self.$http.post(cgis.addFood, cgiParam).then(function(res){
 				console.log(res);
+				if(res.body.iRet == 0){
+					window.alert(message.success);
+					self.resetFood();
+				} else {
+					window.alert(message.http_error);
+				}
 			}, function(err){
-				console.log(err);
+				window.alert(message.http_error);
 			})
 		}
 	}
