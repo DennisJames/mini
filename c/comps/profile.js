@@ -98,6 +98,7 @@ module.exports = {
 				pungency: 1
 			}
 			this.food = tmp;
+			this.picture = '';
 		},
 		submit: function(){
 			var self = this;
