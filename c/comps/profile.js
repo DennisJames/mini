@@ -99,6 +99,7 @@ module.exports = {
 			}
 			this.food = tmp;
 			this.picture = '';
+			this.hasPic = false;
 		},
 		submit: function(){
 			var self = this;
