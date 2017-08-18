@@ -21,7 +21,7 @@ module.exports = {
 	created: function(){
 		var self = this;
 		var sessionKey = '';
-		if(sessionKey = cookie.get('user_session_key') && cookie.get('type') == '0'){
+		if((sessionKey = cookie.get('user_session_key')) && cookie.get('type') == '0'){
 			request(cgis.recommendFood.replace('{{usessionkey}}', sessionKey)
 				.replace('{{start}}', 0).replace('{{num}}', 10), 'get', function(err, res){
 					console.log(err, res);
