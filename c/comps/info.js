@@ -70,11 +70,11 @@ module.exports = {
 			}else{
 				status=2
 				el=$('.reduce_num')
-			}
+			}/*
 			if(el.data('isClicked')){
 				self.animation(el,'clicked')
 				return 
-			}
+			}*/
 			var id=self.$route.params.id
 			var res=[status,id],i=0;
 			self.$http.post(cgis.comFood.replace(/{{}}/g,function(){
