@@ -38,6 +38,7 @@ module.exports = {
 	},
 	food_type: ["粤菜", "川菜", "鲁菜", "苏菜", "浙菜", "闽菜", "湘菜", "徽菜"],
 	message: {
-		http_error: "网络请求错误！"
+		http_error: "网络请求错误！",
+		success: "操作成功！"
 	}
 };

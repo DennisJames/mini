@@ -93,7 +93,7 @@ label { margin: 10px 0px; display: inline-block;}
 	display: inline-block;
 	float: left;
 }
-.food_list .item h3,p{
+.food_list .item h3, .food_list .item p{
 	margin: 10px 0px 10px 250px;
 }
 .food_list .item h3{
@@ -140,4 +140,7 @@ label { margin: 10px 0px; display: inline-block;}
 	width: 200px;
 	text-align: center;
 	margin: 0 auto;
+}
+.detail h3{
+	font-size: 2rem;
 }

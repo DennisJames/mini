@@ -11,7 +11,7 @@ module.exports = {
 					</div>
 					<div v-else> 
 						<div v-if="!errMsg" class="detail">
-							<img :src="food.pic_url" :alt="food.name" />
+							<div class="food_avatar_wrap"><img class="food_avatar" :src="food.pic_url" :alt="food.name" /></div>
 							<h3>{{food.name}}</h3>
 							<p>{{food.introduce}}</p>
 							<p><span>菜系：</span>{{TYPE_TXT[food.food_type]}}<p>
